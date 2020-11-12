@@ -78,8 +78,8 @@ def do_stuff(config_file, output=sys.stdout):
                     print(name+': syncing')
                     new_repo = org_saltait.create_repo('eyp-'+name,'')
                     new_repo.create_source_import('git', repo.clone_url)
-                print('sleeping 300')
-                time.sleep(300)
+                    print('sleeping 300')
+                    time.sleep(300)
 
     print("> stage 3")
 
