@@ -91,8 +91,8 @@ def do_stuff(config_file, output=sys.stdout):
                 if u_repo.name == 'eyp-'+name:
                     print(repo.full_name+' already found - '+u_repo.clone_url)
                 else:
-                    repo.create_fork()
                     print(repo.name+' forked')
+                    repo.create_fork()
                     time.sleep(30)
             except:
                 repo.create_fork()
