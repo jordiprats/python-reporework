@@ -127,8 +127,6 @@ def do_stuff(config_file, output=sys.stdout):
                 print('cloning: '+repo.name)
                 sh.git.clone(repo.clone_url, '/home/jprats/git/'+repo.name, _env={"GIT_SSH_COMMAND": "ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"})
                 time.sleep(10)
-            else:
-                print('ALREADY THERE: '+repo.full_name)
 
     print("> stage 6")
 
@@ -137,6 +135,22 @@ def do_stuff(config_file, output=sys.stdout):
             if el_dolent in repo.parent.full_name:
                 print('TODO: '+repo.full_name)
 
+    print("> stage 7")
+
+    for repo in user_jordiprats.get_repos():
+            if 'eyp-' in repo.name and repo.fork:
+                print(repo.full_name)
+                try:
+                    pr = repo.parent.create_pull(   title="reporework", 
+                                                    body="reporework", 
+                                                    base='{}'.format('master'), 
+                                                    head='{}:{}'.format(el_guapo, 'master'), 
+                                                    draft=False
+                                                )
+                    pr.merge()
+                    time.sleep(10)
+                except:
+                    pass
 
 if __name__ == '__main__':
     try:
