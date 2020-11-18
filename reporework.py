@@ -131,13 +131,6 @@ def do_stuff(config_file, output=sys.stdout):
     print("> stage 6")
 
     for repo in user_jordiprats.get_repos():
-        if repo.parent:
-            if el_dolent in repo.parent.full_name:
-                print('TODO: '+repo.full_name)
-
-    print("> stage 7")
-
-    for repo in user_jordiprats.get_repos():
             if 'eyp-' in repo.name and repo.fork:
                 print(repo.full_name)
                 try:
@@ -151,6 +144,27 @@ def do_stuff(config_file, output=sys.stdout):
                     time.sleep(10)
                 except:
                     pass
+
+    print("> stage 7")
+
+    for repo in user_jordiprats.get_repos():
+            if 'eyp-' in repo.name and repo.fork:
+                for pr in repo.get_pulls(state='open', sort='created', base='master'):
+                    pr.merge()
+                    print(repo.full_name+' merged PR')
+                    time.sleep(10)
+
+    print("> stage 8")
+
+    print('TODO')
+    # create_git_tag_and_release(tag, tag_message, release_name, release_message, object, type, tagger=NotSet, draft=False, prerelease=False)
+
+    print("> CLEAN UP")
+
+    for repo in user_jordiprats.get_repos():
+        if repo.parent:
+            if el_dolent in repo.parent.full_name:
+                print('TODO: '+repo.full_name)
 
 if __name__ == '__main__':
     try:
